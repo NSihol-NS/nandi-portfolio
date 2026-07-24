@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Hero - Earth Tone</title>
+  <title>Nandi Sihol</title>
   <style>
     /* Google Fonts Import */
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800;900&family=Inter:wght@600;700&display=swap');
@@ -25,11 +25,26 @@
       background: linear-gradient(135deg, #c86d51 0%, #d4a373 35%, #a3b18a 70%, #e9edc9 100%);
       color: #283618;
       overflow-x: hidden;
-      padding: 40px 20px;
+      padding: 100px 20px 40px 20px; /* Top padding leaves space for header */
       position: relative;
     }
 
-    /* Main Container */
+    /* Top Brand Name Header (Wero Style) */
+    .top-header {
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: #283618;
+      z-index: 10;
+    }
+
+    /* Main Center Container */
     .hero-container {
       max-width: 1000px;
       width: 100%;
@@ -37,29 +52,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.8rem;
+      gap: 2rem;
       position: relative;
       z-index: 2;
     }
 
-    /* Two-Line Ultra-Bold Headline */
-    .hero-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-      color: #283618;
-    }
-
-    .hero-title span {
-      display: block;
-    }
-
     /* Center Large Square Media Frame */
     .center-media-wrapper {
-      width: clamp(220px, 28vw, 320px);
+      width: clamp(240px, 30vw, 340px);
       aspect-ratio: 1 / 1;
       border-radius: 28px;
       border: 3px solid #283618;
@@ -88,7 +88,6 @@
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 0.5rem;
     }
 
     /* 1. Portfolio Button (Navy Blue with Brutalist Shadow) */
@@ -142,17 +141,16 @@
 </head>
 <body>
 
-  <main class="hero-container">
+  <!-- Top Header Name (Wero Style) -->
+  <header class="top-header">
+    NANDI SIHOL
+  </header>
 
-    <!-- Two-Line Headline -->
-    <h1 class="hero-title">
-      My Portfolio,
-      <span> Stories, and Thoughts</span>
-    </h1>
+  <main class="hero-container">
 
     <!-- Center Media Frame (Square) -->
     <div class="center-media-wrapper">
-      <img src="WhatsApp Image 2026-07-24 at 17.36.38.jpeg">
+      <img src="WhatsApp Image 2026-07-24 at 17.36.38.jpeg" alt="Nandi Sihol">
     </div>
 
     <!-- Dual CTA Buttons -->
