@@ -68,7 +68,7 @@
       background: #fefae0;
       transition: transform 0.3s ease;
       position: relative;
-      z-index: 2; /* Keeps frame above the ball initially */
+      z-index: 2;
     }
 
     .center-media-wrapper:hover {
@@ -94,18 +94,18 @@
     /* --- PADEL BALL ANIMATION STYLES --- */
     .padel-ball {
       position: absolute;
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       background-color: #ccff00; /* Padel yellow-green */
       border: 2.5px solid #283618;
       border-radius: 50%;
       box-shadow: 3px 3px 0px #283618;
-      top: 55%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
       opacity: 0;
       pointer-events: none;
-      z-index: 1; /* Starts behind image frame */
+      z-index: 5; /* Pops out in front of frame during hit */
     }
 
     /* Curved Seams on Padel Ball */
@@ -131,31 +131,30 @@
       transform: scale(0.85) translateX(-3px);
     }
 
-    /* Active Animation Class Triggered by JS */
+    /* Transition Animation Class Triggered by JS */
     .padel-ball.launch {
-      animation: shootPadelBall 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      animation: transitionPadelBall 1.2s ease-in-out forwards;
     }
 
-    /* Ball Trajectory Keyframes */
-    @keyframes shootPadelBall {
+    /* Transition Ball Trajectory */
+    @keyframes transitionPadelBall {
       0% {
-        opacity: 1;
-        z-index: 1;
-        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+        opacity: 0;
+        transform: translate(-280px, 120px) scale(0.6) rotate(0deg);
       }
-      20% {
-        z-index: 3; /* Pops out in front of the image frame */
-        transform: translate(60px, -80px) scale(1.1) rotate(90deg);
+      25% {
+        opacity: 1;
       }
       50% {
-        transform: translate(160px, 40px) scale(0.95) rotate(180deg);
+        /* Smashing across center-front of image */
+        transform: translate(0px, -20px) scale(1.2) rotate(180deg);
+        opacity: 1;
       }
       80% {
-        transform: translate(250px, -20px) scale(0.8) rotate(270deg);
-        opacity: 0.9;
+        opacity: 1;
       }
       100% {
-        transform: translate(320px, 80px) scale(0.5) rotate(360deg);
+        transform: translate(300px, -140px) scale(0.5) rotate(360deg);
         opacity: 0;
       }
     }
@@ -249,26 +248,46 @@
 
   </main>
 
-  <!-- Script for Auto-Rotation & Animation Trigger -->
+  <!-- Script Synchronized for Transition Timing -->
   <script>
     const images = document.querySelectorAll('#image-slider img');
     const padelBall = document.getElementById('padel-ball');
     let currentIndex = 0;
 
-    function rotateImages() {
+    function switchImage() {
+      // Remove active class from current image
       images[currentIndex].classList.remove('active');
+      // Advance index
       currentIndex = (currentIndex + 1) % images.length;
+      // Add active class to next image
       images[currentIndex].classList.add('active');
-
-      // Trigger padel ball animation specifically when the 2nd image (index 1) appears
-      if (currentIndex === 1) {
-        padelBall.classList.remove('launch'); // Reset animation
-        void padelBall.offsetWidth;          // Trigger DOM reflow
-        padelBall.classList.add('launch');    // Play animation
-      }
     }
 
-    setInterval(rotateImages, 3500);
+    function startCycle() {
+      // 1. Initial view: Image 1 is active.
+      // 2. At 3.5s -> Switch to Image 2
+      setTimeout(() => {
+        switchImage(); // Shows Image 2
+
+        // 3. At 6.0s (2.5s after Image 2 appears) -> Launch Padel Ball transition
+        setTimeout(() => {
+          padelBall.classList.remove('launch');
+          void padelBall.offsetWidth; // Reflow DOM
+          padelBall.classList.add('launch');
+
+          // 4. At 6.5s -> Switch image right as ball crosses the center
+          setTimeout(() => {
+            switchImage(); // Switches back to Image 1
+          }, 500);
+
+        }, 2500);
+
+      }, 3500);
+    }
+
+    // Run initial cycle and loop every 7 seconds
+    startCycle();
+    setInterval(startCycle, 7000);
   </script>
 
 </body>
