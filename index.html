@@ -84,14 +84,14 @@
     /* Button Container */
     .cta-container {
       display: flex;
-      gap: 1rem;
+      gap: 1.25rem;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
       margin-top: 0.5rem;
     }
 
-    /* 1. LinkedIn Professional Style Button (Clean text only) */
+    /* 1. Portfolio Button (Navy Blue with Brutalist Shadow) */
     .btn-linkedin {
       display: inline-flex;
       align-items: center;
@@ -102,21 +102,20 @@
       font-weight: 700;
       font-size: 0.95rem;
       padding: 12px 28px;
-      border-radius: 24px;
-      border: 1px solid #0a66c2;
+      border-radius: 50px;
+      border: 2.5px solid #283618;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(10, 102, 194, 0.25);
+      box-shadow: 4px 4px 0px #283618; /* Same hard shadow */
       transition: all 0.2s ease;
     }
 
     .btn-linkedin:hover {
       background-color: #004182;
-      border-color: #004182;
-      box-shadow: 0 6px 16px rgba(10, 102, 194, 0.35);
       transform: translateY(-2px);
+      box-shadow: 6px 6px 0px #283618;
     }
 
-    /* 2. Fun/Pinterest Color Style Button (Horizontal, clean text) */
+    /* 2. Stories and Thoughts Button (Coral Red with Brutalist Shadow) */
     .btn-fun {
       display: inline-flex;
       align-items: center;
@@ -130,20 +129,15 @@
       border-radius: 50px;
       border: 2.5px solid #283618;
       text-decoration: none;
-      box-shadow: 4px 4px 0px #283618;
-      transform: none; /* Keeps button strictly horizontal */
+      box-shadow: 4px 4px 0px #283618; /* Same hard shadow */
       transition: all 0.2s ease;
     }
 
     .btn-fun:hover {
+      background-color: #ff1a3c;
       transform: translateY(-2px);
       box-shadow: 6px 6px 0px #283618;
-      background-color: #ff1a3c;
     }
-  </style>
-</head>
-<body>
-
   <main class="hero-container">
 
     <!-- Two-Line Headline -->
