@@ -57,7 +57,7 @@
       z-index: 2;
     }
 
-    /* Center Square Media Frame (Enlarged Dimension) */
+    /* Center Square Media Frame */
     .center-media-wrapper {
       width: clamp(280px, 40vw, 440px);
       aspect-ratio: 1 / 1;
@@ -68,6 +68,7 @@
       background: #fefae0;
       transition: transform 0.3s ease;
       position: relative;
+      z-index: 2; /* Keeps frame above the ball initially */
     }
 
     .center-media-wrapper:hover {
@@ -88,6 +89,75 @@
 
     .center-media-wrapper img.active {
       opacity: 1;
+    }
+
+    /* --- PADEL BALL ANIMATION STYLES --- */
+    .padel-ball {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background-color: #ccff00; /* Padel yellow-green */
+      border: 2.5px solid #283618;
+      border-radius: 50%;
+      box-shadow: 3px 3px 0px #283618;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1; /* Starts behind image frame */
+    }
+
+    /* Curved Seams on Padel Ball */
+    .padel-ball::before,
+    .padel-ball::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid #283618;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+    }
+
+    .padel-ball::before {
+      clip-path: inset(0 60% 0 0);
+      transform: scale(0.85) translateX(3px);
+    }
+
+    .padel-ball::after {
+      clip-path: inset(0 0 0 60%);
+      transform: scale(0.85) translateX(-3px);
+    }
+
+    /* Active Animation Class Triggered by JS */
+    .padel-ball.launch {
+      animation: shootPadelBall 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    /* Ball Trajectory Keyframes */
+    @keyframes shootPadelBall {
+      0% {
+        opacity: 1;
+        z-index: 1;
+        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+      }
+      20% {
+        z-index: 3; /* Pops out in front of the image frame */
+        transform: translate(60px, -80px) scale(1.1) rotate(90deg);
+      }
+      50% {
+        transform: translate(160px, 40px) scale(0.95) rotate(180deg);
+      }
+      80% {
+        transform: translate(250px, -20px) scale(0.8) rotate(270deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(320px, 80px) scale(0.5) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     /* Button Container */
@@ -159,9 +229,13 @@
 
     <!-- Center Media Frame with Auto-Rotating Images -->
     <div class="center-media-wrapper" id="image-slider">
-      <img src="Nandi Sihol (Photo).png" alt="Nandi Sihol 1" class="active">
-      <img src="WhatsApp Image 2026-07-24 at 17.36.38.jpeg" alt="Nandi Sihol 2">
+      <img src="WhatsApp Image 2026-07-24 at 17.36.38.jpeg" alt="Nandi Sihol 1" class="active">
+      <img src="profile2.jpg" alt="Nandi Sihol 2">
+      <img src="profile3.jpg" alt="Nandi Sihol 3">
     </div>
+
+    <!-- Animated Padel Ball -->
+    <div class="padel-ball" id="padel-ball"></div>
 
     <!-- Dual CTA Buttons -->
     <div class="cta-container">
@@ -176,15 +250,23 @@
 
   </main>
 
-  <!-- Auto-Rotation Script -->
+  <!-- Script for Auto-Rotation & Animation Trigger -->
   <script>
     const images = document.querySelectorAll('#image-slider img');
+    const padelBall = document.getElementById('padel-ball');
     let currentIndex = 0;
 
     function rotateImages() {
       images[currentIndex].classList.remove('active');
       currentIndex = (currentIndex + 1) % images.length;
       images[currentIndex].classList.add('active');
+
+      // Trigger padel ball animation specifically when the 2nd image (index 1) appears
+      if (currentIndex === 1) {
+        padelBall.classList.remove('launch'); // Reset animation
+        void padelBall.offsetWidth;          // Trigger DOM reflow
+        padelBall.classList.add('launch');    // Play animation
+      }
     }
 
     setInterval(rotateImages, 3500);
