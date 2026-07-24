@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Hero - Earth Tone</title>
+  <style>
+    /* Google Fonts Import */
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800;900&family=Inter:wght@500;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* Earthy organic gradient palette */
+      background: linear-gradient(135deg, #c86d51 0%, #d4a373 35%, #a3b18a 70%, #e9edc9 100%);
+      color: #283618;
+      overflow-x: hidden;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    /* Floating Pill Badge */
+    .badge {
+      position: absolute;
+      top: 40px;
+      right: 10%;
+      background-color: #ccd5ae;
+      border: 2.5px solid #283618;
+      border-radius: 50px;
+      padding: 12px 24px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #283618;
+      box-shadow: 3.5px 3.5px 0px #283618;
+      transform: rotate(6deg);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .badge:hover {
+      transform: rotate(0deg) scale(1.05);
+    }
+
+    /* Main Container */
+    .hero-container {
+      max-width: 900px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Header Navigation / Tag */
+    .brand-tag {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      background: rgba(254, 250, 224, 0.45);
+      backdrop-filter: blur(10px);
+      padding: 6px 18px;
+      border-radius: 30px;
+      border: 1.5px solid rgba(40, 54, 24, 0.2);
+      color: #283618;
+    }
+
+    /* Ultra-Bold Headline */
+    .hero-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 4.8rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: #283618;
+    }
+
+    /* Center Large Square Media Frame (Fits Image or Video) */
+    .center-media-wrapper {
+      /* Increased size: scales comfortably up to 340px */
+      width: clamp(240px, 32vw, 340px);
+      aspect-ratio: 1 / 1;
+      border-radius: 28px;
+      border: 3px solid #283618;
+      box-shadow: 7px 7px 0px #283618;
+      overflow: hidden;
+      margin: 0.75rem 0;
+      background: #fefae0;
+      transition: transform 0.3s ease;
+    }
+
+    .center-media-wrapper:hover {
+      transform: scale(1.02) rotate(-1.5deg);
+    }
+
+    .center-media-wrapper img,
+    .center-media-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Minimalist Scroll Arrow Indicator */
+    .scroll-arrow {
+      width: 44px;
+      height: 44px;
+      background: #fefae0;
+      border: 2px solid #283618;
+      color: #283618;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 3px 3px 0px #283618;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .scroll-arrow:hover {
+      transform: translateY(3px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Status Badge -->
+  <div class="badge">
+    Open for Projects ↗
+  </div>
+
+  <main class="hero-container">
+    <div class="brand-tag">Portfolio & Daily Thoughts</div>
+
+    <!-- Bold Main Headline -->
+    <h1 class="hero-title">
+      BUILDING PRODUCTS.<br>
+      SHARING THOUGHTS.
+    </h1>
+
+    <!-- Center Media Frame (Large Square) -->
+    <div class="center-media-wrapper">
+      <!-- OPTION A: For Video (Uncomment below to use video) -->
+      <!--
+      <video autoplay loop muted playsinline poster="your-fallback-image.jpg">
+        <source src="your-video.mp4" type="video/mp4">
+      </video>
+      -->
+
+      <!-- OPTION B: For Image -->
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Hero Media">
+    </div>
+
+    <!-- Subtle Scroll Down Indicator -->
+    <a href="#work" class="scroll-arrow" title="Scroll down">
+      ↓
+    </a>
+  </main>
+
+</body>
+</html>
