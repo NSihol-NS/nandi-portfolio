@@ -25,20 +25,20 @@
       background: linear-gradient(135deg, #c86d51 0%, #d4a373 35%, #a3b18a 70%, #e9edc9 100%);
       color: #283618;
       overflow-x: hidden;
-      padding: 100px 20px 40px 20px; /* Top padding leaves space for header */
+      padding: 90px 20px 40px 20px;
       position: relative;
     }
 
-    /* Top Brand Name Header (Wero Style) */
+    /* Top Brand Header */
     .top-header {
       position: absolute;
       top: 32px;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
       text-transform: uppercase;
       color: #283618;
       z-index: 10;
@@ -57,9 +57,9 @@
       z-index: 2;
     }
 
-    /* Center Large Square Media Frame */
+    /* Center Square Media Frame (Enlarged Dimension) */
     .center-media-wrapper {
-      width: clamp(240px, 30vw, 340px);
+      width: clamp(280px, 40vw, 440px);
       aspect-ratio: 1 / 1;
       border-radius: 28px;
       border: 3px solid #283618;
@@ -67,18 +67,27 @@
       overflow: hidden;
       background: #fefae0;
       transition: transform 0.3s ease;
+      position: relative;
     }
 
     .center-media-wrapper:hover {
       transform: scale(1.02);
     }
 
-    .center-media-wrapper img,
-    .center-media-wrapper video {
+    /* Auto-Changing Image Slider Styles */
+    .center-media-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .center-media-wrapper img.active {
+      opacity: 1;
     }
 
     /* Button Container */
@@ -90,7 +99,7 @@
       flex-wrap: wrap;
     }
 
-    /* 1. Portfolio Button (Navy Blue with Brutalist Shadow) */
+    /* 1. Portfolio Button */
     .btn-linkedin {
       display: inline-flex;
       align-items: center;
@@ -114,7 +123,7 @@
       box-shadow: 6px 6px 0px #283618;
     }
 
-    /* 2. Stories and Thoughts Button (Coral Red with Brutalist Shadow) */
+    /* 2. Stories and Thoughts Button */
     .btn-fun {
       display: inline-flex;
       align-items: center;
@@ -141,16 +150,17 @@
 </head>
 <body>
 
-  <!-- Top Header Name (Wero Style) -->
+  <!-- Top Header Name -->
   <header class="top-header">
     NANDI SIHOL
   </header>
 
   <main class="hero-container">
 
-    <!-- Center Media Frame (Square) -->
-    <div class="center-media-wrapper">
-      <img src="WhatsApp Image 2026-07-24 at 17.36.38.jpeg" alt="Nandi Sihol">
+    <!-- Center Media Frame with Auto-Rotating Images -->
+    <div class="center-media-wrapper" id="image-slider">
+      <img src="WhatsApp Image 2026-07-24 at 17.36.38.jpeg" alt="Nandi Sihol 1" class="active">
+      <img src="Nandi Sihol (Photo).png" alt="Nandi Sihol 2">
     </div>
 
     <!-- Dual CTA Buttons -->
@@ -165,6 +175,20 @@
     </div>
 
   </main>
+
+  <!-- Auto-Rotation Script -->
+  <script>
+    const images = document.querySelectorAll('#image-slider img');
+    let currentIndex = 0;
+
+    function rotateImages() {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.add('active');
+    }
+
+    setInterval(rotateImages, 3500);
+  </script>
 
 </body>
 </html>
